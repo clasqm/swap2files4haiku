@@ -21,7 +21,7 @@ mkdir -p $pkgfileslocation/bin
 cp -f  swap $pkgfileslocation/bin
 chmod +x $pkgfileslocation/bin/swap
 mkdir -p $pkgfileslocation/documentation/man/man1
-cp -f swap2files.1 $pkgfileslocation/documentation/man/man1
+cp -f swap.1 $pkgfileslocation/documentation/man/man1
 
 #backup latest packaging datafile to git location
 cp -f $archlocation/.PackageInfo $pkgfileslocation
