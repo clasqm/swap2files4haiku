@@ -1,7 +1,7 @@
 #!/bin/sh
 
 #adjust the following:
-pkgname=swap2files_any
+pkgname=swap2files
 srclocation=/Storage/source/git/swap2files
 reponame=/Storage/projects/repo_scripts
 mkdir -p $reponame
@@ -18,8 +18,8 @@ cd $srclocation
 
 #move files to where they are required for packaging
 mkdir -p $pkgfileslocation/bin
-mv -f  swap2files $pkgfileslocation/bin
-chmod +x $pkgfileslocation/bin/swap2files
+cp -f  swap $pkgfileslocation/bin
+chmod +x $pkgfileslocation/bin/swap
 mkdir -p $pkgfileslocation/documentation/man/man1
 cp -f swap2files.1 $pkgfileslocation/documentation/man/man1
 
