@@ -1,0 +1,26 @@
+name				swap2files
+version				1.0-1
+architecture			any
+
+summary				"Swap two files"
+Description			"CLI utility to swap contents of two files. Does not work with links.
+
+usage: swap [-q] filea fileb
+            -q    quiet
+"
+
+packager			"Michel Clasquin-Johnson <clasqm@gmail.com>"
+vendor				"clasqm"
+copyrights			"Steven A <stevenaaus@yahoo.com>"
+licenses				"GNU GPL v2"
+provides {
+					swap2files = 1.0-1
+					cmd:swap
+}
+URLs {
+					https://sourceforge.net/projects/filerenameutils/
+					http://clasquin-johnson.co.za/michel/haiku
+}
+source-urls {
+					ttps://github.com/clasqm/swap2files4haiku.git
+}

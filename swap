@@ -1,0 +1,60 @@
+#!/bin/bash
+
+# swap
+# - swap two files. does not work with links
+# - author: Steven A (stevenaaus@yahoo.com)
+
+function Error () {
+	echo "$Name: $*"
+	exit 1
+}
+function Usage () {
+	echo "swap"
+	echo
+	echo "Swap two files. Does not work with links"
+	echo "Author: Steven A (stevenaaus@yahoo.com)"
+	echo
+	echo "usage: $Name [-q] filea fileb"
+	echo "               -q    quiet"
+	echo
+	exit 1
+}
+
+Name=`basename $0`
+
+quiet=no
+if [ "$1" == "-q" ] 
+	then quiet=yes ; shift
+fi
+
+case "$1" in
+	"" ) echo "$Name: missing arg(s)" ;
+	     exit 1 ;;
+	-* ) Usage ;;
+esac
+
+### bash trick to remove trailing slashes
+arg1=${1%/}
+arg2=${2%/}
+
+### check for errors
+[ $# == 2 ]	|| Error "two args expected"
+[ -e "$arg1" ]	|| Error "\"$arg1\", no such file"
+[ -e "$arg2" ]	|| Error "\"$arg2\", no such file"
+[ -h "$arg1" ]	&& Error "\"$arg1\", is a symbolic link"
+[ -h "$arg2" ]	&& Error "\"$arg2\", is a symbolic link"
+
+### where to put our temp file hey ? ..is is a work in progress
+
+# place the tmp fle in the directory of arg1, or in /tmp
+TMP="`dirname "$arg1"`/swap_tmp$$"
+# test our privilidges
+if touch "$TMP"  ; then
+	rm "$TMP"	;# in case of directory
+else
+	TMP=/tmp/swap_tmp$$
+fi
+
+### perform swap
+( mv "$arg1" "$TMP" && mv "$arg2" "$arg1" && mv "$TMP" "$arg2" ) \
+  && ( [ "$quiet" == "no" ] && echo "swap ok: $arg1<->$arg2" )
